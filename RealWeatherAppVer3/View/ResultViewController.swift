@@ -41,8 +41,11 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // 이걸 viewDidLoad 에서도 가능하게 하려면 PublishSubject 대신 Behaviorrelay 사용해야 함
         viewModel.getWeatherDict(cityName: cityName)
+        
+        debugPrint("ResultViewController viewDidLoad(\(self.cityName))")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -52,11 +55,32 @@ class ResultViewController: UIViewController {
         tableView.register(UINib(nibName: "CollectionTableViewCell", bundle: nil), forCellReuseIdentifier: "CollectionTableViewCell")
         tableView.register(UINib(nibName: "FooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "FooterView")
     }
+    override func viewWillAppear(_ animated: Bool) {
+        // PublishSubject를 사용할 것이면 여기에 viewModel.getWeatherDict(cityName: cityName) 실행
+        super.viewWillAppear(animated)
+        debugPrint("ResultViewController viewWillAppear(\(cityName))")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        debugPrint("ResultViewController viewDidAppear(\(cityName))")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        debugPrint("ResultViewController viewWillDisAppear(\(cityName))")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        debugPrint("ResultViewController viewDidDisAppear(\(cityName))")
+    }
 }
 
 extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        debugPrint("ResultViewController numberOfSections(\(cityName))")
         return 2
     }
     
