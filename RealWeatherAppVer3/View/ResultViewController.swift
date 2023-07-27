@@ -43,7 +43,7 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         
         // 이걸 viewDidLoad 에서도 가능하게 하려면 PublishSubject 대신 Behaviorrelay 사용해야 함
-        viewModel.getWeatherDict(cityName: cityName)
+        // viewModel.getWeatherDict2(cityName: cityName)
         
         debugPrint("ResultViewController viewDidLoad(\(self.cityName))")
         
@@ -98,8 +98,8 @@ extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
                 view.cityNameLabel.text = cityName
-                        
-            viewModel.weatherDict
+            
+            viewModel.getWeatherDict2(cityName: cityName)
                 .observe(on: MainScheduler.instance) // UI 관련 작업은 메인 스레드에서 이벤트 처리
                 .subscribe(onNext: { [weak view] weatherDict in // .subscribe(onNext:) 메서드를 사용하여 Observable을 구독합니다. 이렇게 하면 Observable에서 이벤트가 발생할 때마다 클로저가 실행
                         guard let view = view else { return }
@@ -113,7 +113,7 @@ extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
                     })
                 .disposed(by: disposebag)
                         
-            viewModel.mainDict
+            viewModel.getWeatherDict2(cityName: cityName)
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak view] mainDict in
                     guard let view = view else { return }

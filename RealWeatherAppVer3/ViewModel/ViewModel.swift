@@ -13,6 +13,8 @@ class ViewModel {
     
     var api = Api()
     
+    let disposebag = DisposeBag()
+    
     var weatherInfo: [String:Any]?
     var weatherKeys: [String] = ["name","week","coord","main", "weather","wind"]
     
@@ -64,5 +66,59 @@ class ViewModel {
                 debugPrint("ResultViewController Error(\(error))")
             }
         }
+    }
+    
+    func getWeatherInfo(cityName: String) -> Observable<[String:Any]> {
+        return Observable.create() { emitter in
+            self.api.getApi2(cityName: cityName)
+                .subscribe(
+                    onNext: { weatherInfo in
+                        emitter.onNext(weatherInfo)
+                        print("weatherInfo : \(weatherInfo)")
+                        emitter.onCompleted()
+                    })
+                .disposed(by: self.disposebag)
+            print("2")
+            return Disposables.create()
+        }
+    }
+    
+    func getWeatherDict2(cityName: String) -> Observable<[String:Any]> {
+        return Observable.create() { emitter in
+            self.getWeatherInfo(cityName: cityName)
+                .subscribe(
+                    onNext: { weatherInfo in
+                        
+                        if let dictionary = self.weatherInfo,
+                           let mainDictionary = dictionary["main"] as? [String: Any],
+                           let windDictionary = dictionary["wind"] as? [String: Any],
+                           let coordDictionary = dictionary["coord"] as? [String: Any],
+                           let weatherArray = dictionary["weather"] as? [Any],
+                           let weatherDictionary = weatherArray.first as? [String: Any] {
+                            
+                            self.mainDict.accept(mainDictionary)
+                            self.windDict.accept(windDictionary)
+                            self.coordDict.accept(coordDictionary)
+                            
+                            //                            var weatherValues: [String: Any] = [:]
+                            //                            for (key, value) in weatherDictionary {
+                            //                                weatherValues[key] = value
+                            //                            }
+                            //                            weatherDict.accept(weatherValues)
+                            }
+                            
+                        emitter.onNext(self.mainDict.value)
+                        emitter.onNext(self.windDict.value)
+                        emitter.onNext(self.coordDict.value)
+                        print("self.mainDict : \(self.mainDict.value)")
+                        emitter.onCompleted()
+                        }
+                )
+                .disposed(by: self.disposebag)
+            
+            print("3")
+            return Disposables.create()
+        }
+        
     }
 }
