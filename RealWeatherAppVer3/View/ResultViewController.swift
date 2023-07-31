@@ -21,6 +21,8 @@ public func kToC(kelvin: Double) -> String {
 }
 
 class ResultViewController: UIViewController {
+        
+    var api = Api()
     
     var viewModel = ViewModel()
     
@@ -41,10 +43,7 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 이걸 viewDidLoad 에서도 가능하게 하려면 PublishSubject 대신 Behaviorrelay 사용해야 함
-        // viewModel.getWeatherDict2(cityName: cityName)
-        
+                
         debugPrint("ResultViewController viewDidLoad(\(self.cityName))")
         
         tableView.delegate = self
@@ -59,6 +58,7 @@ class ResultViewController: UIViewController {
         // PublishSubject를 사용할 것이면 여기에 viewModel.getWeatherDict(cityName: cityName) 실행
         super.viewWillAppear(animated)
         debugPrint("ResultViewController viewWillAppear(\(cityName))")
+        viewModel.getWeatherDict3(cityName: cityName)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,7 +99,7 @@ extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
                 view.cityNameLabel.text = cityName
             
-            viewModel.getWeatherDict2(cityName: cityName)
+            viewModel.weatherDict
                 .observe(on: MainScheduler.instance) // UI 관련 작업은 메인 스레드에서 이벤트 처리
                 .subscribe(onNext: { [weak view] weatherDict in // .subscribe(onNext:) 메서드를 사용하여 Observable을 구독합니다. 이렇게 하면 Observable에서 이벤트가 발생할 때마다 클로저가 실행
                         guard let view = view else { return }
@@ -113,7 +113,7 @@ extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
                     })
                 .disposed(by: disposebag)
                         
-            viewModel.getWeatherDict2(cityName: cityName)
+            viewModel.mainDict
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak view] mainDict in
                     guard let view = view else { return }

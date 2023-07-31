@@ -25,21 +25,19 @@ class ViewController: UIViewController {
         if let input = cityNameTextField.text {
             let trimmedInput = input.replacingOccurrences(of: " ", with: "")
             let cityNames = trimmedInput.components(separatedBy: ",")
-            
-            getResult(cityNames: cityNames)
+        
+            getResult2(cityNames: cityNames)
         }
     }
     
-    func getResult(cityNames: [String]) {
-        Task {
-            var viewsList: [UIViewController] = []
-            for cityName in cityNames {
-                let resultViewController = ResultViewController(cityName: cityName)
-                viewsList.append(resultViewController)
-            }
-            let pageViewController = PageViewController(viewsList: viewsList)
-            self.navigationController?.pushViewController(pageViewController, animated: true)
+    func getResult2(cityNames: [String]) {
+        var viewsList: [UIViewController] = []
+        for cityName in cityNames {
+            let resultViewController = ResultViewController(cityName: cityName)
+            viewsList.append(resultViewController)
         }
+        let pageViewController = PageViewController(viewsList: viewsList)
+        self.navigationController?.pushViewController(pageViewController, animated: true)
     }
 }
 
