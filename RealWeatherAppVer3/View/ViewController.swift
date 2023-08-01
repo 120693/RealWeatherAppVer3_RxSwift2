@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.title = "실시간 날씨 정보"
-        cityNameTextField.text = "Seoul, Gwangju, Busan, Seoul"
+        cityNameTextField.text = "Seoul, Gwangju, Busan, Seoul, London, BangKok"
     }
 
     @IBAction func resultButton(_ sender: UIButton) {

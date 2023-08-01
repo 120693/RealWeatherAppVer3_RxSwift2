@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		929881322A779BD2009D3002 /* KRProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 929881312A779BD2009D3002 /* KRProgressHUD */; };
 		92997C762A6F5EEA00641850 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92997C752A6F5EEA00641850 /* Api.swift */; };
 		92997C782A6F5FC100641850 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92997C772A6F5FC100641850 /* WeatherModel.swift */; };
 		92997C7A2A6F65E100641850 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92997C792A6F65E100641850 /* ViewModel.swift */; };
@@ -101,6 +102,7 @@
 				92997C8A2A6F6B0800641850 /* Kingfisher in Frameworks */,
 				92997C812A6F664A00641850 /* RxSwift in Frameworks */,
 				92997C7F2A6F664A00641850 /* RxRelay in Frameworks */,
+				929881322A779BD2009D3002 /* KRProgressHUD in Frameworks */,
 				92997C7D2A6F664A00641850 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +247,7 @@
 				92997C7E2A6F664A00641850 /* RxRelay */,
 				92997C802A6F664A00641850 /* RxSwift */,
 				92997C892A6F6B0800641850 /* Kingfisher */,
+				929881312A779BD2009D3002 /* KRProgressHUD */,
 			);
 			productName = RealWeatherAppVer3;
 			productReference = 92C86ECB2A675D85008ECA0F /* RealWeatherAppVer3.app */;
@@ -321,6 +324,7 @@
 			packageReferences = (
 				92997C7B2A6F664A00641850 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				92997C882A6F6B0800641850 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				929881302A779BD2009D3002 /* XCRemoteSwiftPackageReference "KRProgressHUD" */,
 			);
 			productRefGroup = 92C86ECC2A675D85008ECA0F /* Products */;
 			projectDirPath = "";
@@ -724,6 +728,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		929881302A779BD2009D3002 /* XCRemoteSwiftPackageReference "KRProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krimpedance/KRProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		92997C7B2A6F664A00641850 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -743,6 +755,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		929881312A779BD2009D3002 /* KRProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 929881302A779BD2009D3002 /* XCRemoteSwiftPackageReference "KRProgressHUD" */;
+			productName = KRProgressHUD;
+		};
 		92997C7C2A6F664A00641850 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 92997C7B2A6F664A00641850 /* XCRemoteSwiftPackageReference "RxSwift" */;

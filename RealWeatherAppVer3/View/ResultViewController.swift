@@ -43,7 +43,8 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        // BehaviorRelay 사용했을 경우
+        viewModel.getWeatherDict3(cityName: cityName)
         debugPrint("ResultViewController viewDidLoad(\(self.cityName))")
         
         tableView.delegate = self
@@ -58,7 +59,7 @@ class ResultViewController: UIViewController {
         // PublishSubject를 사용할 것이면 여기에 viewModel.getWeatherDict(cityName: cityName) 실행
         super.viewWillAppear(animated)
         debugPrint("ResultViewController viewWillAppear(\(cityName))")
-        viewModel.getWeatherDict3(cityName: cityName)
+        // viewModel.getWeatherDict3(cityName: cityName) // PublishSubject 사용했을 경우
     }
     
     override func viewDidAppear(_ animated: Bool) {
